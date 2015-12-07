@@ -1,2 +1,19 @@
 ---
-# tasks file for docker-consul
+# Workaround for https://github.com/ansible/ansible-modules-core/issues/1792#issuecomment-148264962
+- name: Make sure required PyPi packages are installed
+  pip: name={{ item }} state=present
+  with_items:
+    - docker-py==1.2.3
+    - six>=1.4.0
+
+- name: Make sure Docker is running
+  service: >
+    name=docker
+    state=started
+    enabled=yes
+
+- include: consul_leader.yml
+  when: consul_leader_ip is not defined
+
+- include: consul_follower.yml
+  when: consul_leader_ip is defined

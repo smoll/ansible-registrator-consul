@@ -1,0 +1,8 @@
+# Test playbook, used with hosts.sample, by Vagrantfile
+
+- hosts: all
+  roles:
+  - { role: aeriscloud.docker }
+  - { role: bobbyrenwick.pip }
+  tasks:
+  - include: "tasks/main.yml"
