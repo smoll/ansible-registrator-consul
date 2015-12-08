@@ -1,3 +1,6 @@
+- name: DEBUG consul leader run command
+  debug: msg="leader private ip is {{ansible_eth1.ipv4.address}} and expected cluster size is {{consul_cluster_size}}"
+
 - name: Run Consul leader
   docker:
     name: consul
@@ -12,8 +15,7 @@
     - "{{ansible_eth1.ipv4.address}}:8302:8302/udp"
     - "{{ansible_eth1.ipv4.address}}:8400:8400"
     - "{{ansible_eth1.ipv4.address}}:8500:8500"
-    - "{{ansible_eth1.ipv4.address}}:53:53"
-    - "{{ansible_eth1.ipv4.address}}:53:53/udp"
+    - "{{ansible_docker0.ipv4.address}}:53:53/udp"
     volumes:
     - /mnt:/data
     pull: always

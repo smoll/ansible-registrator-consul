@@ -1,4 +1,4 @@
-# Test playbook, used with hosts.sample, by Vagrantfile
+# Test playbook used by Vagrantfile
 
 - hosts: all
   roles:

@@ -1,7 +1,7 @@
 $number_of_machines = 3
 
 Vagrant.configure("2") do |config|
-  # always use Vagrant's insecure key
+  # Always use Vagrant's insecure key
   config.ssh.insert_key = false
 
   config.vm.box = "phusion-open-ubuntu-14.04-amd64"
@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "ansible" do |ansible|
-    ansible.inventory_path = "hosts.sample"
+    ansible.inventory_path = "test_hosts"
     ansible.playbook = "test.yml"
     ansible.sudo = true
     ansible.verbose = "v"

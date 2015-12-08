@@ -1,4 +1,4 @@
-ansible-docker-consul (**NOT WORKING YET**)
+ansible-docker-consul
 =========
 
 Ansible role for bootstrapping a Docker-based Consul cluster. Currently uses [`gliderlabs/consul:legacy`](https://hub.docker.com/r/gliderlabs/consul/) (might extend this to `gliderlabs/consul:latest` in the future.)
@@ -43,17 +43,9 @@ Then bring up the vagrant hosts and run the plays against them
 
 ```
 vagrant up
-```
 
-To bring the machines up and run the Ansible plays in _separate steps_ (useful for debugging/developing the role)
-
-```
+# or separate steps
 vagrant up --no-provision
-```
-
-Afterwards,
-
-```
 vagrant provision
 ```
 
