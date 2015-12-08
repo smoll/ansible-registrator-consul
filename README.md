@@ -14,15 +14,19 @@ Dependencies of the [docker module](http://docs.ansible.com/ansible/docker_modul
 Role Variables
 --------------
 
-TODO: A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+These variables are only needed for the initial bootstrap process. See the [README from gliderlabs/docker-consul](https://github.com/gliderlabs/docker-consul/blob/4dad2dd6c88af8c8c5680f5dcc392542e000c878/README.md#running-a-real-consul-cluster-in-a-production-environment) for more info.
+
+`consul_cluster_size`: The total size of the Consul cluster before it attempts to bootstrap. Needs to be specified on the _leader_ host only.
+
+`consul_leader_ip`: The private IP of the leader host. Needs to be specified on all _follower_ hosts.
+
+Note that _once initial bootstrap is complete_, the leader is constantly reelected and even if one or more nodes go bad, they will [maintain a quorum](https://www.consul.io/docs/internals/consensus.html) as long as there are 3 or more nodes.
 
 Dependencies
 ------------
 
 * aeriscloud.docker ([GitHub](https://github.com/AerisCloud/ansible-docker) / [Ansible Galaxy](https://galaxy.ansible.com/detail#/role/3019))
 * bobbyrenwick.pip ([GitHub](https://github.com/bobbyrenwick/ansible-pip) / [Ansible Galaxy](https://galaxy.ansible.com/detail#/role/393))
-
-See [test_requirements.yml](./test_requirements.yml) and [test.yml](./test.yml) to see how to ensure dependencies are run ahead of this role.
 
 Example Playbook
 ----------------
