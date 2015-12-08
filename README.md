@@ -19,8 +19,8 @@ TODO: A description of the settable variables for this role should go here, incl
 Dependencies
 ------------
 
-aeriscloud.docker ([GitHub](https://galaxy.ansible.com/detail#/role/3019) / [Ansible Galaxy](https://github.com/AerisCloud/ansible-docker))
-bobbyrenwick.pip ([GitHub](https://github.com/bobbyrenwick/ansible-pip) / [Ansible Galaxy](https://galaxy.ansible.com/detail#/role/393))
+* aeriscloud.docker ([GitHub](https://galaxy.ansible.com/detail#/role/3019) / [Ansible Galaxy](https://github.com/AerisCloud/ansible-docker))
+* bobbyrenwick.pip ([GitHub](https://github.com/bobbyrenwick/ansible-pip) / [Ansible Galaxy](https://galaxy.ansible.com/detail#/role/393))
 
 See [test_requirements.yml](./test_requirements.yml) and [test.yml](./test.yml) to see how to ensure dependencies are run ahead of this role.
 
@@ -51,7 +51,7 @@ ec2-54-91-78-105.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
 ec2-54-82-227-223.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
 ```
 
-Note that `consul_leader_ip` is the private IP of the consul leader. This playbook also assumes that the private IP is the IP of the `eth1` interface (ansible_eth1.ipv4.address) -- I'm not sure if this is correct, feel free to submit a PR if it doesn't work for you.
+Note that `consul_leader_ip` is the private IP of the consul leader. This playbook also assumes that the private IP is the IP of the `eth1` interface (`{{ansible_eth1.ipv4.address}}`) -- I'm not sure if this is correct; feel free to submit a PR if it doesn't work for you.
 
 Vagrant test
 ------------
