@@ -19,7 +19,7 @@ TODO: A description of the settable variables for this role should go here, incl
 Dependencies
 ------------
 
-* aeriscloud.docker ([GitHub](https://galaxy.ansible.com/detail#/role/3019) / [Ansible Galaxy](https://github.com/AerisCloud/ansible-docker))
+* aeriscloud.docker ([GitHub](https://github.com/AerisCloud/ansible-docker) / [Ansible Galaxy](https://galaxy.ansible.com/detail#/role/3019))
 * bobbyrenwick.pip ([GitHub](https://github.com/bobbyrenwick/ansible-pip) / [Ansible Galaxy](https://galaxy.ansible.com/detail#/role/393))
 
 See [test_requirements.yml](./test_requirements.yml) and [test.yml](./test.yml) to see how to ensure dependencies are run ahead of this role.
