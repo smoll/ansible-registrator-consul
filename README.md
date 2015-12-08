@@ -19,16 +19,39 @@ TODO: A description of the settable variables for this role should go here, incl
 Dependencies
 ------------
 
-TODO: A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+aeriscloud.docker ([GitHub](https://galaxy.ansible.com/detail#/role/3019) / [Ansible Galaxy](https://github.com/AerisCloud/ansible-docker))
+bobbyrenwick.pip ([GitHub](https://github.com/bobbyrenwick/ansible-pip) / [Ansible Galaxy](https://galaxy.ansible.com/detail#/role/393))
+
+See [test_requirements.yml](./test_requirements.yml) and [test.yml](./test.yml) to see how to ensure dependencies are run ahead of this role.
 
 Example Playbook
 ----------------
 
-TODO: Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Write a playbook `consul.yml`
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```
+- hosts: all
+  roles:
+  - { role: aeriscloud.docker }
+  - { role: bobbyrenwick.pip }
+  tasks:
+  - include: "tasks/main.yml"
+```
+
+And a inventory file `/etc/ansible/hosts` that looks like
+
+```
+[consul_leader]
+ec2-54-204-214-172.compute-1.amazonaws.com consul_cluster_size=5
+
+[consul_followers]
+ec2-54-235-59-210.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
+ec2-54-83-161-83.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
+ec2-54-91-78-105.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
+ec2-54-82-227-223.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
+```
+
+Note that `consul_leader_ip` is the private IP of the consul leader. This playbook also assumes that the private IP is the IP of the `eth1` interface (ansible_eth1.ipv4.address) -- I'm not sure if this is correct, feel free to submit a PR if it doesn't work for you.
 
 Vagrant test
 ------------
@@ -36,7 +59,7 @@ Vagrant test
 First, install playbook dependencies by running
 
 ```
-sudo ansible-galaxy install -r requirements.yml # --force
+sudo ansible-galaxy install -r test_requirements.yml # --force
 ```
 
 Then bring up the vagrant hosts and run the plays against them
