@@ -16,4 +16,4 @@
   when: consul_leader_ip is not defined
 
 - include: consul_follower.yml
-  when: consul_leader_ip is defined
+  when: consul_cluster_size is not defined
