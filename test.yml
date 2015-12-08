@@ -4,5 +4,4 @@
   roles:
   - { role: aeriscloud.docker }
   - { role: bobbyrenwick.pip }
-  tasks:
-  - include: "tasks/main.yml"
+  - { role: docker-consul }

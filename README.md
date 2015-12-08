@@ -34,8 +34,7 @@ Write a playbook `consul.yml`
   roles:
   - { role: aeriscloud.docker }
   - { role: bobbyrenwick.pip }
-  tasks:
-  - include: "tasks/main.yml"
+  - { role: docker-consul }
 ```
 
 And a inventory file `/etc/ansible/hosts` that looks like
@@ -75,7 +74,7 @@ vagrant provision
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
