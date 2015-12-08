@@ -32,9 +32,13 @@ Write a playbook `consul.yml`
 ```
 - hosts: all
   roles:
-  - { role: aeriscloud.docker }
-  - { role: bobbyrenwick.pip }
-  - { role: docker-consul }
+  - { role: smoll.docker-consul }
+```
+
+And a `requirements.yml`
+
+```
+- src: smoll.docker-consul
 ```
 
 And a inventory file `/etc/ansible/hosts` that looks like
@@ -48,6 +52,13 @@ ec2-54-235-59-210.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
 ec2-54-83-161-83.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
 ec2-54-91-78-105.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
 ec2-54-82-227-223.compute-1.amazonaws.com consul_leader_ip=169.254.169.254
+```
+
+Then run
+
+```
+$ ansible-galaxy install -r requirements.yml
+$ ansible-playbook -i /etc/ansible/hosts consul.yml
 ```
 
 Note that `consul_leader_ip` is the private IP of the consul leader. This playbook also assumes that the private IP is the IP of the `eth1` interface (`{{ansible_eth1.ipv4.address}}`) -- I'm not sure if this is correct; feel free to submit a PR if it doesn't work for you.
@@ -66,9 +77,14 @@ Then bring up the vagrant hosts and run the plays against them
 ```
 vagrant up
 
-# or separate steps
+# separately:
 vagrant up --no-provision
+
+# then
 vagrant provision
+
+# or, a more realistic simulation:
+ansible-playbook --private-key=~/.vagrant.d/insecure_private_key -u vagrant -i test_hosts -s test.yml
 ```
 
 License

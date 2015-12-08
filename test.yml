@@ -2,6 +2,4 @@
 
 - hosts: all
   roles:
-  - { role: aeriscloud.docker }
-  - { role: bobbyrenwick.pip }
   - { role: docker-consul }
