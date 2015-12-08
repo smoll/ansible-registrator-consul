@@ -12,6 +12,10 @@
     state=started
     enabled=yes
 
+- name: Update facts if docker0 is not defined
+  action: setup
+  when: ansible_docker0 is not defined
+
 - include: consul_leader.yml
   when: consul_leader_ip is not defined
 
