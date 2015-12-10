@@ -74,6 +74,8 @@ Note that `consul_leader_ip` is the private IP of the consul leader. This playbo
 Vagrant test
 ------------
 
+(**NOTE:** if you clone this repo, the parent directory must be named `registrator-consul` -- not `ansible-registrator-consul` -- or Ansible won't be able to find this role for the Vagrant test!)
+
 First, install playbook dependencies by running
 
 ```
