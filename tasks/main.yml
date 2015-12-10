@@ -21,3 +21,5 @@
 
 - include: consul_follower.yml
   when: consul_cluster_size is not defined
+
+- include: registrator.yml

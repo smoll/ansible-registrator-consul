@@ -1,7 +1,11 @@
-ansible-docker-consul
+ansible-registrator-consul
 =========
 
-Ansible role for bootstrapping a Docker-based Consul cluster. Currently uses [`gliderlabs/consul:legacy`](https://hub.docker.com/r/gliderlabs/consul/) (might extend this to `gliderlabs/consul:latest` in the future.)
+Ansible role for Consul + Registrator. Currently uses [`gliderlabs/consul:legacy`](https://hub.docker.com/r/gliderlabs/consul/).
+
+Consul = service registry that can also be used for DNS lookup
+
+Registrator = automatic registration+deregistration of Docker containers
 
 Requirements
 ------------
@@ -31,18 +35,18 @@ Dependencies
 Example Playbook
 ----------------
 
-Write a playbook `consul.yml`
+Here's a sample setup for 5 Docker hosts in AWS EC2. First, write a playbook `service_discovery.yml`
 
 ```
 - hosts: all
   roles:
-  - { role: smoll.docker-consul }
+  - { role: smoll.registrator-consul }
 ```
 
 And a `requirements.yml`
 
 ```
-- src: smoll.docker-consul
+- src: smoll.registrator-consul
 ```
 
 And a inventory file `/etc/ansible/hosts` that looks like
@@ -62,7 +66,7 @@ Then run
 
 ```
 $ ansible-galaxy install -r requirements.yml
-$ ansible-playbook -i /etc/ansible/hosts consul.yml
+$ ansible-playbook -i /etc/ansible/hosts service_discovery.yml
 ```
 
 Note that `consul_leader_ip` is the private IP of the consul leader. This playbook also assumes that the private IP is the IP of the `eth1` interface (`{{ansible_eth1.ipv4.address}}`) -- I'm not sure if this is correct; feel free to submit a PR if it doesn't work for you.
