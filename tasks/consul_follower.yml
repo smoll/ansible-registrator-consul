@@ -1,20 +1,20 @@
 - name: DEBUG consul follower run command
-  debug: msg="private ip is {{ansible_eth1.ipv4.address}} and joining leader ip {{consul_leader_ip}}"
+  debug: msg="private ip is {{ansible_default_ipv4.address}} and joining leader ip {{consul_leader_ip}}"
 
 - name: Run Consul follower
   docker:
     name: consul
     hostname: "{{inventory_hostname}}"
-    image: gliderlabs/consul:legacy
-    command: -server -advertise {{ansible_eth1.ipv4.address}} -join {{consul_leader_ip}}
+    image: gliderlabs/consul:latest
+    command: -server -advertise {{ansible_default_ipv4.address}} -join {{consul_leader_ip}}
     ports:
-    - "{{ansible_eth1.ipv4.address}}:8300:8300"
-    - "{{ansible_eth1.ipv4.address}}:8301:8301"
-    - "{{ansible_eth1.ipv4.address}}:8301:8301/udp"
-    - "{{ansible_eth1.ipv4.address}}:8302:8302"
-    - "{{ansible_eth1.ipv4.address}}:8302:8302/udp"
-    - "{{ansible_eth1.ipv4.address}}:8400:8400"
-    - "{{ansible_eth1.ipv4.address}}:8500:8500"
+    - "{{ansible_default_ipv4.address}}:8300:8300"
+    - "{{ansible_default_ipv4.address}}:8301:8301"
+    - "{{ansible_default_ipv4.address}}:8301:8301/udp"
+    - "{{ansible_default_ipv4.address}}:8302:8302"
+    - "{{ansible_default_ipv4.address}}:8302:8302/udp"
+    - "{{ansible_default_ipv4.address}}:8400:8400"
+    - "{{ansible_default_ipv4.address}}:8500:8500"
     - "{{ansible_docker0.ipv4.address}}:53:53/udp"
     volumes:
     - /mnt:/data

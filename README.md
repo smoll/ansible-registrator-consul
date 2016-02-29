@@ -69,7 +69,7 @@ $ ansible-galaxy install -r requirements.yml
 $ ansible-playbook -i /etc/ansible/hosts service_discovery.yml
 ```
 
-Note that `consul_leader_ip` is the private IP of the consul leader. This playbook also assumes that the private IP is the IP of the `eth1` interface (`{{ansible_eth1.ipv4.address}}`) -- I'm not sure if this is correct; feel free to submit a PR if it doesn't work for you.
+Note that `consul_leader_ip` is the private IP of the consul leader. This playbook also assumes that the private IP is the IP of the `eth1` interface (`{{ansible_default_ipv4.address}}`) -- I'm not sure if this is correct; feel free to submit a PR if it doesn't work for you.
 
 Vagrant test
 ------------
