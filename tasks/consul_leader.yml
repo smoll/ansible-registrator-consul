@@ -1,20 +1,20 @@
 - name: DEBUG consul leader run command
-  debug: msg="leader private ip is {{ansible_eth1.ipv4.address}} and expected cluster size is {{consul_cluster_size}}"
+  debug: msg="leader private ip is {{ansible_default_ipv4.address}} and expected cluster size is {{consul_cluster_size}}"
 
 - name: Run Consul leader
   docker:
     name: consul
     hostname: "{{inventory_hostname}}"
-    image: gliderlabs/consul:legacy
-    command: -server -advertise {{ansible_eth1.ipv4.address}} -bootstrap-expect {{consul_cluster_size}}
+    image: gliderlabs/consul:latest
+    command: -server -advertise {{ansible_default_ipv4.address}} -bootstrap-expect {{consul_cluster_size}}
     ports:
-    - "{{ansible_eth1.ipv4.address}}:8300:8300"
-    - "{{ansible_eth1.ipv4.address}}:8301:8301"
-    - "{{ansible_eth1.ipv4.address}}:8301:8301/udp"
-    - "{{ansible_eth1.ipv4.address}}:8302:8302"
-    - "{{ansible_eth1.ipv4.address}}:8302:8302/udp"
-    - "{{ansible_eth1.ipv4.address}}:8400:8400"
-    - "{{ansible_eth1.ipv4.address}}:8500:8500"
+    - "{{ansible_default_ipv4.address}}:8300:8300"
+    - "{{ansible_default_ipv4.address}}:8301:8301"
+    - "{{ansible_default_ipv4.address}}:8301:8301/udp"
+    - "{{ansible_default_ipv4.address}}:8302:8302"
+    - "{{ansible_default_ipv4.address}}:8302:8302/udp"
+    - "{{ansible_default_ipv4.address}}:8400:8400"
+    - "{{ansible_default_ipv4.address}}:8500:8500"
     - "{{ansible_docker0.ipv4.address}}:53:53/udp"
     volumes:
     - /mnt:/data
